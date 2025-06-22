@@ -16,3 +16,11 @@ $ docker run -it -p 1884:1883 -v "C:\Users\user\Documents\Docker\Mosquitto\confi
 2.docker UI介面製作
 Volumes :host path:點選.conf檔案的路徑 /container path:參考下列網址文件/Configuration>複製此路徑 /mosquitto/config
 https://hub.docker.com/_/eclipse-mosquitto?uuid=D61E1A08-72C7-47ED-914B-0A13A7417072
+
+Creating a password file
+https://mosquitto.org/documentation/authentication-methods/
+
+mosquitto_passwd -c <password file> <username>
+mosquitto_passwd -c 路徑/filename admin
+
+到docker exec下指令
