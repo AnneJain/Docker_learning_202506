@@ -4,7 +4,7 @@
  📌 課程操作紀錄與心得
 | 日期  | 主題                       | 關鍵收穫           |
 | ------ | ------------------------ | -------------- |
-| 250615 | Docker 安裝與 hello-world| 成功建立Docker環境(串聯MQTT&MySQL)|
-| 250622 | | |
+| 250615 | Docker 安裝與 hello-world| 建立Docker環境(串聯MQTT&MySQL)|
+| 250622 | 建立influxDB、phpMyAdmin、MQTTBox| 新增MQTTBox使用者帳號|
 | 250629 | | |
 
