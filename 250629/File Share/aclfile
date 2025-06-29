@@ -1,0 +1,99 @@
+# IMPORTANT: If a client's username has no matching rules, it is denied access by default.
+# 重要：如果客戶端的使用者名稱沒有任何匹配的規則，其存取權限將預設被拒絕。
+
+# The ACL file is parsed from top to bottom. The first matching rule is applied.
+# ACL 檔案會從上到下依序解析。一旦找到第一個匹配的規則，就會立即應用。
+
+# Default rules for clients without a specific user entry
+# 針對沒有特定使用者條目的客戶端的預設規則
+
+# Allow anonymous clients (if allow_anonymous true in mosquitto.conf)
+# 允許匿名客戶端 (如果 mosquitto.conf 中 'allow_anonymous' 為 true)
+
+# to read system topics
+# 讀取系統主題
+
+# topic read $SYS/#
+# 註解掉此行，表示不允許匿名客戶端讀取系統主題。若取消註解，將允許讀取如 $SYS/broker/clients/active 等系統狀態訊息。
+
+
+# -------------------------------------------------------
+
+
+# User 'admin' has full access to everything
+# 使用者 'admin' 擁有所有主題的完整存取權限
+user admin
+
+topic readwrite #
+# 'topic readwrite #' 授予 'admin' 對所有主題（# 萬用字元）的讀取 (read) 和寫入 (write) 權限。
+
+# -------------------------------------------------------
+
+# User 'anne' can publish to its own sensor topic and read commands
+# 使用者 'anne' 可以發布到自己的感測器主題並讀取指令
+user anne
+
+topic write anne/feeds/#
+# 'topic write anne/feeds/#' 允許 'anne' 在 'anne/feeds/' 命名空間下的所有主題上發布訊息。
+
+topic read anne/feeds/#
+# 'topic read anne/feeds/#' 允許 'anne' 訂閱 'anne/feeds/' 命名空間下的所有主題。
+
+# -------------------------------------------------------
+
+# User 'mqtt_user' can publish to its own sensor topic and read commands
+# 使用者 'mqtt_user' 可以發布到自己的感測器主題並讀取指令
+user mqtt_user
+
+topic write mqtt_user/feeds/#
+# 允許 'mqtt_user' 在 'mqtt_user/feeds/' 命名空間下的所有主題上發布訊息。
+
+topic read mqtt_user/feeds/#
+# 允許 'mqtt_user' 訂閱 'mqtt_user/feeds/' 命名空間下的所有主題。
+
+# -------------------------------------------------------
+
+# User 'gee' can only read data from all devices
+# 使用者 'gee' 只能讀取所有裝置的資料
+user gee
+
+topic read anne/feeds/+/#
+# 'topic read anne/feeds/+/#' 允許 'gee' 讀取 'anne' 命名空間下兩層及以上的主題，例如 'anne/feeds/temp'。
+# 注意：這不會匹配單層主題，例如 'anne/status'。
+
+topic read mqtt_user/feeds/+/#
+# 允許 'gee' 讀取 'mqtt_user' 命名空間下兩層及以上的主題。
+
+# -------------------------------------------------------
+
+# User 'guest' has very limited access
+# 使用者 'guest' 只有非常有限的存取權限
+user guest
+
+topic write public/feeds/#
+# 允許 'guest' 在 'public/' 命名空間下的所有主題上發布訊息。
+
+topic read public/feeds/#
+# 允許 'guest' 訂閱 'public/' 命名空間下的所有主題。
+
+
+# -------------------------------------------------------
+
+
+# Using patterns: Allow any client to publish its state to a topic containing its client ID
+# 使用模式：允許任何客戶端發布其狀態到包含其客戶端 ID 的主題
+# %c is replaced with the client's Client ID.
+# %c 會被替換為客戶端的 Client ID。
+
+pattern write $SYS/broker/connection/%c/state
+# 允許任何客戶端向其專屬的系統狀態主題（包含其 Client ID）發布訊息。
+# 例如，ID 為 'my_device' 的客戶端可發布到 '$SYS/broker/connection/my_device/state'。
+
+# Allow any user to publish to a topic that includes their username
+# 允許任何使用者發布到包含其使用者名稱的主題
+# %u is replaced with the username after successful authentication.
+# %u 會被替換為成功驗證後的使用者名稱。
+
+pattern write user_data/%u/telemetry
+# 允許任何使用者向其專屬的 telemetry 主題（包含其使用者名稱）發布訊息。
+# 例如，使用者 'daniel' 可發布到 'user_data/daniel/telemetry'。
