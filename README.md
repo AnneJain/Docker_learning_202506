@@ -6,5 +6,5 @@
 | ------ | ------------------------ | -------------- |
 | 250615 | Docker 安裝與 hello-world| 建立Docker環境(串聯MQTT&MySQL)|
 | 250622 | 建立influxDB、phpMyAdmin、MQTTBox| 新增MQTTBox使用者帳號|
-| 250629 | | |
+| 250629 | Setting FUXA,Node-Red,influxDB and ModBus|使用ModBus建立溫濕度計模擬器並sync to FUXA |  
 
