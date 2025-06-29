@@ -14,7 +14,8 @@
 2. df -k :check SSD/HDD memory
 3. ps -ef :check proxy(before open docker desktop.ext):此時尚未有docker的啟用紀錄  
 4. sudo su - :進入系統管理員權限、輸入登入密碼  
-5. ifconfig : 查看網路卡資訊(會顯示 not found,接續執行 sudo apt install net-tools 以系統管理員身分進行安裝) ps.系統管理員與一般user身分安裝的路徑會有差異  
+5. ifconfig : 查看網路卡資訊(會顯示 not found,接續執行 sudo apt install net-tools 以系統管理員身分進行安裝)  
+   ps.系統管理員與一般user身分安裝的路徑會有差異   
 6. netstat -na more : 檢查mosquitto有成功開啟  
 
 |Proto|Recv-Q |Send-Q|Local Address | Foreign Address |  State |
