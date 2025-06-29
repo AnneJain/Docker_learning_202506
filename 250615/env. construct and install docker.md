@@ -75,6 +75,7 @@
 ### 三、本機安裝配合MySql資料庫的軟體-HeidiSQL  
  3.1 下載安裝後修改並測試是否能連到MYSQL(記得修改port & user password)  
  3.2 匯入DB資料(測試資料等)  
+ 3.3 下載網址 https://www.heidisql.com/download.php  
 
 ### 四、 安裝MQTTBox與建立Topic
  4.1 至微軟商城下載MQTTBox https://apps.microsoft.com/detail/9nblggh55jzg?hl=zh-TW&gl=TW  
