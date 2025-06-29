@@ -74,11 +74,11 @@
 1. Node-Red  
   1.1 官方文件 https://hub.docker.com/r/nodered/node-red?uuid=DD91A413-C325-4758-B3AF-3D7FE2A72062     
   1.2 need to use the specific tag name to install due to an upstream docker bug in the architecture detection   
-   in docker desktop    
+   💡in docker desktop    
     1.2.1 /volumes/create/new volume/ name : NodeRED_data  
     1.2.2 /images/"nodered/node-red"/run :  
    | Node-Red | 1880:1880 | host path : NodeRED_data | container path : /data |   
-   in terminal
+   💡in terminal
    ```  
    docker run -it -p 1880:1880 -v NodeRED_data:/data --name mynodered nodered/node-red:1.0.1-10-minimal-arm32v6  
    ```
@@ -87,12 +87,12 @@
 2. influxDB  
   2.1 官方文件  https://hub.docker.com/_/influxdb?uuid=DD91A413-C325-4758-B3AF-3D7FE2A72062  
   2.2 To start an InfluxDB v2 container, enter the following command  
-   in docker desktop  
+   💡in docker desktop  
     2.2.1 /volumes/create/new volume/ name1 : influxdb_data ; name2 :influxdb_config  
     2.2.2 /images/"nodered/node-red"/run : | influxDB | 8086:8086|    
         | host path 1 : influxdb_data   | container path 1 : /var/lib/influxdb2 |    
         | host path 2 : influxdb_config | container path 2 : /etc/influxdb2     |    
-    in terminal
+   💡in terminal
      ```  
        docker run \
        -p 8086:8086 \
@@ -106,7 +106,7 @@
 ### 四、Setting ModBus: 以ModBus為實體機的模擬器  
 :white_check_mark: 以溫濕度計為例,建立模擬數值並於client端模擬器顯示。    
 1. 執行ModBusSim32.exe (sever)  
-  1.1 creat connection : connection/connect/"ModBus/TCPSvr"/select service port 502/公用網路✅/允許存取
+  1.1 creat connection : connection/connect/"ModBus/TCPSvr"/select service port 502/公用網路✅/允許存取   
   1.2 new file : File/new  
 
     |Point Type| 描述  |data type|   
@@ -116,9 +116,9 @@
     |03 | 可讀寫  | int     |    
     |04 | 唯獨    | int     |
 
-   1.3 change data type (int to float): display/float(swap)
-   1.4 設定溫濕度計欄位數量與client端設定: address=1/length=12/device id=5/modbus point type=04
-   1.5 點2下 "x0001"即可進入設定,本次設定使用auto simulation隨機自動產生數值。
+   1.3 change data type (int to float): display/float(swap)  
+   1.4 設定溫濕度計欄位數量與client端設定: address=1/length=12/device id=5/modbus point type=04  
+   1.5 點2下 "x0001"即可進入設定,本次設定使用auto simulation隨機自動產生數值。  
    
    |數值名稱|數值位置|Enabled|simulation type|change interval(secs)更新頻率|low最小值|high最大值|      
    |-------|-------|--------|---------------|----------------------------|--------|----------|    
@@ -130,8 +130,8 @@
    |遞減   |30011  |✅      |Decrement      | 2                          |0       |       999|
 
     
-2. 執行ModScan32.exe (client)
-   2.1 connection : connection/connect/connection deatils
+2. 執行ModScan32.exe (client)  
+   2.1 connection : connection/connect/connection deatils  
    
     |Feild name | value  |    
     |----------|-------|    
@@ -144,7 +144,7 @@
 4. check sever and client is sync  
 
 ---  
-### 五、Setting ModBus: 以ModBus為實體機的模擬器  
+### 五、connection on FUXA    
 :white_check_mark: 將ModBus資料link到FUXA  
 1. 開啟FUXA : http://localhost:1881/
 2. 左下狀態列/editor/⚙️/connetions/+
